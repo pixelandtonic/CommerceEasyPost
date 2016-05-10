@@ -1,0 +1,26 @@
+{#
+/**
+ * Easy Post plugin for Craft CMS
+ *
+ * Easy Post Settings.twig
+ *
+ * @author    Pixel &amp; Tonic
+ * @copyright Copyright (c) 2016 Pixel &amp; Tonic
+ * @link      http://craftcommerce.com
+ * @package   EasyPost
+ * @since     0.1
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% includeCssResource "easypost/css/EasyPost_Style.css" %}
+{% includeJsResource "easypost/js/EasyPost_Script.js" %}
+
+{{ forms.textField({
+    label: 'Some Setting',
+    instructions: 'Enter some setting here.',
+    id: 'someSetting',
+    name: 'someSetting', 
+    value: settings['someSetting']})
+}}
