@@ -1,0 +1,28 @@
+{
+    "name": "pixelandtonic/commerce-easy-post",
+    "description": "Easy Post plugin for Craft Commerce",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luke Holder",
+            "email": "lukemh@gmail.com"
+        }
+    ],
+    "config": {
+        "cache-files-ttl": 0,
+        "process-timeout": 1800,
+        "vendor-dir": "easypost/vendor",
+        "github-oauth": {
+            "github.com": "fc31fa76ff0fb8a2a9828c4c5bdb1c8d233b9894"
+        }
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "CommerceEasyPost\\": "easypost/CommerceEasyPost"
+        }
+    },
+    "require": {
+        "easypost/easypost-php" : "3.0.3"
+    }
+}
