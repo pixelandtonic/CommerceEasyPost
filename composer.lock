@@ -4,9 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "752474fe0b2c5097ab584fef3a6c1e5e",
-    "content-hash": "4b1e1925f301353bbc0d24b4ede7ec3b",
+    "hash": "d11359e41f25eb3fec32877c3e482ac0",
+    "content-hash": "12cda6bd2ad9c289e59a54ca9575a846",
     "packages": [
+        {
+            "name": "dvdoug/boxpacker",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dvdoug/BoxPacker.git",
+                "reference": "0403bdf6681fac77e7bf4bee24048acd2eea6fc8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dvdoug/BoxPacker/zipball/0403bdf6681fac77e7bf4bee24048acd2eea6fc8",
+                "reference": "0403bdf6681fac77e7bf4bee24048acd2eea6fc8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "monolog/monolog": "~1.11",
+                "phpunit/phpunit": "^4.3",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DVDoug\\BoxPacker\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Doug Wright",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An implementation of the 3D bin packing/knapsack problem (aka creating parcels by putting items into boxes)",
+            "homepage": "https://github.com/dvdoug/BoxPacker",
+            "keywords": [
+                "bin packing",
+                "binpacking",
+                "box",
+                "boxes",
+                "boxpacking",
+                "container",
+                "knapsack",
+                "packaging",
+                "packing",
+                "parcel",
+                "parcelpacking",
+                "shipping"
+            ],
+            "time": "2016-01-23 20:45:33"
+        },
         {
             "name": "easypost/easypost-php",
             "version": "3.0.3",
@@ -52,6 +109,53 @@
                 "shipping"
             ],
             "time": "2016-02-23 00:42:44"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d8e60a5619fff77f9669da8997697443ef1a1d7e",
+                "reference": "d8e60a5619fff77f9669da8997697443ef1a1d7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2016-01-06 21:40:42"
         }
     ],
     "packages-dev": [],

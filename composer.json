@@ -23,6 +23,7 @@
         }
     },
     "require": {
-        "easypost/easypost-php" : "3.0.3"
+        "easypost/easypost-php": "~3.0",
+        "dvdoug/boxpacker": "^1.5"
     }
 }
