@@ -144,7 +144,7 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function prepSettings($settings)
 	{
-		// Modify $settings here...
+		craft()->cache->delete('easypost-allCarrierAccounts');
 
 		return $settings;
 	}
@@ -156,7 +156,10 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function commerce_registerShippingMethods()
 	{
-		return craft()->easyPost_shippingMethods->getAllShippingMethods();
+		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
+		{
+			return craft()->easyPost_shippingMethods->getAllShippingMethods();
+		}
 	}
 
 	/**
@@ -166,14 +169,17 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function commerce_registerAvailableShippingMethods($order)
 	{
-		$rates = craft()->easyPost_rates->getRates($order);
-		$shippingMethods = [];
-		foreach ($rates as $rate)
+		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
 		{
-			$shippingMethods[] = new ShippingMethod($rate);
-		}
+			$rates = craft()->easyPost_rates->getRates($order);
+			$shippingMethods = [];
+			foreach ($rates as $rate)
+			{
+				$shippingMethods[] = new ShippingMethod($rate);
+			}
 
-		return $shippingMethods;
+			return $shippingMethods;
+		}
 	}
 
 	/**
