@@ -18,9 +18,27 @@
 {% includeJsResource "easypost/js/EasyPost_Script.js" %}
 
 {{ forms.textField({
-    label: 'Easy Post API Key',
-    instructions: 'This is the API key Easy Post supplies.',
+    label: 'Production Secret API Key',
+    instructions: 'This API ket will be used when devMode is false.',
     id: 'apiKey',
     name: 'apiKey',
     value: settings['apiKey']})
 }}
+
+{{ forms.textField({
+    label: 'Test Secret API Key',
+    instructions: 'This API ket will be used when devMode is true.',
+    id: 'testApiKey',
+    name: 'testApiKey',
+    value: settings['testApiKey']})
+}}
+
+
+{{ forms.textField({
+    label: 'Mark-up Percentage',
+    instructions: 'Add an additonal price mark-up to the shipping prices returned from the shipping gateways. Enter 0-100.',
+    id: 'markup',
+    name: 'markup',
+    value: settings['markup']})
+}}
+

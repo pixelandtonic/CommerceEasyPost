@@ -3,6 +3,7 @@
 namespace Craft;
 
 use EasyPost\CarrierAccount;
+use EasyPost\EasyPost;
 
 /**
  * Easy Post Carriers
@@ -22,7 +23,26 @@ class EasyPost_CarriersService extends BaseApplicationComponent
 	{
 		if (!isset($this->_allCarrierAccounts))
 		{
-			$this->_allCarrierAccounts = CarrierAccount::all();
+			$allCarrierAccounts = craft()->cache->get('easypost-allCarrierAccounts');
+
+			if (!$allCarrierAccounts)
+			{
+				// Since this API call requires a production API key, lets use it temporarily.
+				$originalAPiKey = EasyPost::getApiKey();
+				$apiKey = craft()->plugins->getPlugin('easyPost')->getSettings()->apiKey;
+				if ($apiKey)
+				{
+					EasyPost::setApiKey($apiKey);
+				}
+				$this->_allCarrierAccounts = CarrierAccount::all();
+				craft()->cache->set('easypost-allCarrierAccounts', $this->_allCarrierAccounts);
+
+				EasyPost::setApiKey($originalAPiKey);
+			}
+			else
+			{
+				$this->_allCarrierAccounts = $allCarrierAccounts;
+			}
 		}
 
 		return $this->_allCarrierAccounts;

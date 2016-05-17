@@ -2,6 +2,7 @@
 
 namespace Craft;
 
+use CommerceEasyPost\ShippingMethod;
 use EasyPost\EasyPost;
 
 require __DIR__.'/vendor/autoload.php';
@@ -14,9 +15,19 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function init()
 	{
-		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
+		if (craft()->config->get('devMode'))
 		{
-			EasyPost::setApiKey($this->settings['apiKey']);
+			if (isset($this->settings['testApiKey']) && $this->settings['testApiKey'])
+			{
+				EasyPost::setApiKey($this->settings['testApiKey']);
+			}
+		}
+		else
+		{
+			if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
+			{
+				EasyPost::setApiKey($this->settings['apiKey']);
+			}
 		}
 	}
 
@@ -73,7 +84,7 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function getDeveloper()
 	{
-		return 'Pixel &amp; Tonic';
+		return 'Pixel & Tonic';
 	}
 
 	/**
@@ -149,12 +160,31 @@ class EasyPostPlugin extends BasePlugin
 	}
 
 	/**
+	 * Returns the shipping methods available for the current order.
+	 *
+	 * @return mixed
+	 */
+	public function commerce_registerAvailableShippingMethods($order)
+	{
+		$rates = craft()->easyPost_rates->getRates($order);
+		$shippingMethods = [];
+		foreach ($rates as $rate)
+		{
+			$shippingMethods[] = new ShippingMethod($rate);
+		}
+
+		return $shippingMethods;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function defineSettings()
 	{
 		return [
-			'apiKey' => [AttributeType::String, 'label' => 'Easy Post API Key', 'default' => ''],
+			'apiKey'     => [AttributeType::String, 'label' => 'Easy Post API Key', 'default' => ''],
+			'testApiKey' => [AttributeType::String, 'label' => 'Test Easy Post API Key', 'default' => ''],
+			'markup'     => [AttributeType::Number, 'label' => 'Mark-up Percentage', 'default' => '5']
 		];
 	}
 

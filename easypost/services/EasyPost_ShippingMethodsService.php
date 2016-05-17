@@ -3,7 +3,7 @@
 namespace Craft;
 
 use CommerceEasyPost\ShippingMethod;
-use EasyPost\CarrierAccount;
+use CommerceEasyPost\ListingShippingMethod;
 
 /**
  * Easy Post Carriers
@@ -23,17 +23,34 @@ class EasyPost_ShippingMethodsService extends BaseApplicationComponent
 	{
 		if (!isset($this->_allShippingMethods))
 		{
-			$carrierAccounts = CarrierAccount::all();
+			// Grab all easy post carrier accounts;
+
+			$carrierAccounts = craft()->easyPost_carriers->getAllCarrierAccounts();
 			$shippingMethods = [];
 			foreach ($carrierAccounts as $carrier)
 			{
-				$shippingMethods[] = new ShippingMethod($carrier->type, $carrier->description);
+				$shippingMethods[] = new ListingShippingMethod($carrier);
 			}
 
 			$this->_allShippingMethods = $shippingMethods;
 		}
 
 		return $this->_allShippingMethods;
+	}
+
+	public function getAllAvailableShippingMethods($order)
+	{
+
+		$rates = craft()->easyPost_rates->getRates($order);
+
+		$shippingMethods = [];
+
+		foreach ($rates as $rate)
+		{
+			$shippingMethods[] = new ShippingMethod($rate);
+		}
+
+		return $shippingMethods;
 	}
 
 }

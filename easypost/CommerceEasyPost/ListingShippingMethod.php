@@ -2,30 +2,13 @@
 namespace CommerceEasyPost;
 
 use Commerce\Interfaces\ShippingMethod as CommerceShippingMethod;
-use Craft\StringHelper;
 
-class ShippingMethod implements CommerceShippingMethod
+class ListingShippingMethod implements CommerceShippingMethod
 {
-	private $_rate;
-	private $_handle;
-	private $_name;
 
-	public function __construct($rate)
+	public function __construct($carrier)
 	{
-		$this->_rate = $rate;
-		$this->_handle = $rate->carrier_account_id."-".$rate->service;
-		$this->_name = $rate->carrier." - ".$this->camelToTitle($rate->service);
-	}
-
-	private function camelToTitle($camelStr)
-	{
-		$intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/',
-			' $0',
-			$camelStr);
-		$titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/',
-			'$1 $2',
-			$intermediate);
-		return $titleStr;
+		$this->_carrier = $carrier;
 	}
 
 	/**
@@ -56,7 +39,7 @@ class ShippingMethod implements CommerceShippingMethod
 	 */
 	public function getHandle()
 	{
-		return $this->_handle;
+		return $this->_carrier->id;
 	}
 
 	/**
@@ -68,7 +51,6 @@ class ShippingMethod implements CommerceShippingMethod
 	public function getCpEditUrl()
 	{
 		return "";
-//		return UrlHelper::getCpUrl("/easypost/carrieraccounts/".$this->getCarrier()->id);
 	}
 
 	/**
@@ -78,7 +60,8 @@ class ShippingMethod implements CommerceShippingMethod
 	 */
 	public function getRules()
 	{
-		return [new ShippingRule($this->_rate)];
+		// Listing has no rules since it is not used for carts.
+		return [];
 	}
 
 	/**
@@ -88,7 +71,7 @@ class ShippingMethod implements CommerceShippingMethod
 	 */
 	public function getName()
 	{
-		return $this->_name;
+		return $this->_carrier->description;
 	}
 
 	/**

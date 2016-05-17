@@ -3,27 +3,28 @@
 namespace CommerceEasyPost;
 
 use Commerce\Interfaces\ShippingRule as CommerceShippingRule;
+use Craft\StringHelper;
 
 class ShippingRule implements CommerceShippingRule
 {
-
-	private $_handle;
 	private $_description;
 	private $_price;
-
-	public function __construct($handle)
-	{
-		$this->_handle = $handle;
-	}
+	private $_rate;
 
 	/**
-	 * Returns the unique handle of this Shipping Rule
+	 * ShippingRule constructor.
 	 *
-	 * @return string
 	 */
-	public function getHandle()
+	public function __construct($rate)
 	{
-		return $this->_handle;
+		$this->_description = StringHelper::uppercaseFirst($rate->service);
+		if ($rate->delivery_days)
+		{
+			$this->_description = "Delivered in ".$rate->delivery_days." days. ".$rate->service;
+		}
+
+		$this->_rate = $rate;
+		$this->_price = $rate->rate;
 	}
 
 	/**
@@ -33,9 +34,7 @@ class ShippingRule implements CommerceShippingRule
 	 */
 	public function matchOrder(\Craft\Commerce_OrderModel $order)
 	{
-		$rates = craft()->easyPost_rates->getRates($order, $this->_handle);
-
-
+		return true;
 	}
 
 	/**
