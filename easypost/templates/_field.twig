@@ -1,0 +1,31 @@
+<div class="easypost">
+
+	<ul>
+		<li v-for="rate in rates">
+			[[ rate.service ]] - [[ rate.rate ]]
+		</li>
+	</ul>
+
+	<button v-on:click="getRates">Get Shipping Quote</button>
+</div>
+
+	<script>
+	{% includeJs %}
+
+	$(document).ready(function () {
+		Vue.config.delimiters = ["[[", "]]"];
+
+		new Vue({
+			el: '.easypost',
+			data: {
+				rates: []
+			},
+			methods: {
+				getRates : function(){
+					this.rates = $.get( "", { orderId: "{{ order.id }}" });
+				}
+			}
+		});
+	});
+	{% endincludejs %}
+	</script>

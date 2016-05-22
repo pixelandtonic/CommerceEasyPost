@@ -101,19 +101,11 @@ class EasyPost_RatesService extends BaseApplicationComponent
 		                        "phone"   => "323-855-0394"];
 		$from_address = Address::create($from_address_params);
 
-
-//		$packer = new Packer();
-//		$packer->addBox(new TestBox());
-//		$packer->addItem(new TestItem('Item 1', 250, 250, 2, 200));
-//		$packer->addItem(new TestItem('Item 2', 250, 250, 2, 200));
-//		$packer->addItem(new TestItem('Item 3', 250, 250, 2, 200));
-//		$packedBoxes = $packer->pack();
-
 		$parcel_params = ["length"             => 20.2,
 		                  "width"              => 10.9,
 		                  "height"             => 5,
 		                  "predefined_package" => null,
-		                  "weight"             => 14.8
+		                  "weight"             => 1.8
 		];
 		$parcel = Parcel::create($parcel_params);
 

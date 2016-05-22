@@ -150,35 +150,32 @@ class EasyPostPlugin extends BasePlugin
 	}
 
 	/**
-	 * Returns the shipping methods available for the current order.
+	 * Returns the shipping methods available for the current order, or just list the base shipping accounts.
 	 *
-	 * @return mixed
+	 * @param Commerce_OrderModel|null $order
+	 *
+	 * @return array
 	 */
-	public function commerce_registerShippingMethods()
+	public function commerce_registerShippingMethods($order = null)
 	{
 		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
 		{
-			return craft()->easyPost_shippingMethods->getAllShippingMethods();
-		}
-	}
-
-	/**
-	 * Returns the shipping methods available for the current order.
-	 *
-	 * @return mixed
-	 */
-	public function commerce_registerAvailableShippingMethods($order)
-	{
-		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
-		{
-			$rates = craft()->easyPost_rates->getRates($order);
-			$shippingMethods = [];
-			foreach ($rates as $rate)
+			
+			if ($order)
 			{
-				$shippingMethods[] = new ShippingMethod($rate);
+				$rates = craft()->easyPost_rates->getRates($order);
+				$shippingMethods = [];
+				foreach ($rates as $rate)
+				{
+					$shippingMethods[] = new ShippingMethod($rate);
+				}
+
+				return $shippingMethods;
 			}
 
-			return $shippingMethods;
+			// return the display shipping methods. These never match the order
+			// and are only used for display purposes.
+			return craft()->easyPost_shippingMethods->getAllShippingMethods();
 		}
 	}
 
@@ -188,8 +185,8 @@ class EasyPostPlugin extends BasePlugin
 	protected function defineSettings()
 	{
 		return [
-			'apiKey'     => [AttributeType::String, 'label' => 'Easy Post API Key', 'default' => ''],
-			'testApiKey' => [AttributeType::String, 'label' => 'Test Easy Post API Key', 'default' => ''],
+			'apiKey'     => [AttributeType::String, 'label' => 'Easy Post API Key', 'default' => '', 'required' => true],
+			'testApiKey' => [AttributeType::String, 'label' => 'Test Easy Post API Key', 'default' => '', 'required' => true],
 			'markup'     => [AttributeType::Number, 'label' => 'Mark-up Percentage', 'default' => '5']
 		];
 	}
