@@ -2,8 +2,8 @@
 
 namespace Craft;
 
-use CommerceEasyPost\ShippingMethod;
 use CommerceEasyPost\ListingShippingMethod;
+use CommerceEasyPost\ShippingMethod;
 
 /**
  * Easy Post Carriers

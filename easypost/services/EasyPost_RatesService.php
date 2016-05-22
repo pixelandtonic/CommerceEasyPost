@@ -2,11 +2,11 @@
 
 namespace Craft;
 
-use DVDoug\BoxPacker\Packer;
-use DVDoug\BoxPacker\TestBox;
 use EasyPost\Address;
 use EasyPost\Parcel;
 use EasyPost\Shipment;
+use PhpUnitsOfMeasure\PhysicalQuantity\Length;
+use PhpUnitsOfMeasure\PhysicalQuantity\Mass;
 
 /**
  * Easy Post Rates
@@ -63,6 +63,7 @@ class EasyPost_RatesService extends BaseApplicationComponent
 		}
 
 		$this->_shipmentsBySignature[$signature] = $shipment;
+
 		return $this->_shipmentsBySignature[$signature];
 	}
 
@@ -92,21 +93,29 @@ class EasyPost_RatesService extends BaseApplicationComponent
 
 		$to_address = Address::create($to_address_params);
 
-		$from_address_params = ["name"    => "Jon Calhoun",
-		                        "street1" => "388 Townsend St",
-		                        "street2" => "Apt 20",
-		                        "city"    => "San Francisco",
-		                        "state"   => "CA",
-		                        "zip"     => "94107",
-		                        "phone"   => "323-855-0394"];
+		$from_address_params = craft()->config->get('fromAddress', 'easypost');
+
 		$from_address = Address::create($from_address_params);
 
-		$parcel_params = ["length"             => 20.2,
-		                  "width"              => 10.9,
-		                  "height"             => 5,
+		$settings = craft()->plugins->getPlugin('commerce')->getSettings();
+
+		$length = new Length($order->getTotalLength(), $settings->dimensionUnits);
+		$width = new Length($order->getTotalWidth(), $settings->dimensionUnits);
+		$height = new Length($order->getTotalHeight(), $settings->dimensionUnits);
+		$weight = new Mass($order->getTotalWeight(), $settings->weightUnits);
+
+		$parcel_params = ["length"             => $length->toUnit('inch'),
+		                  "width"              => $width->toUnit('inch'),
+		                  "height"             => $height->toUnit('inch'),
 		                  "predefined_package" => null,
-		                  "weight"             => 1.8
+		                  "weight"             => $weight->toUnit('ounce')
 		];
+
+		if ($parcel_params['weight'] == 0 || $parcel_params['length'] == 0 || $parcel_params['height'] == 0 || $parcel_params['width'] == 0)
+		{
+			return false;
+		}
+
 		$parcel = Parcel::create($parcel_params);
 
 
@@ -122,15 +131,16 @@ class EasyPost_RatesService extends BaseApplicationComponent
 	{
 		$totalQty = $order->getTotalQty();
 		$totalWeight = $order->getTotalWeight();
+		$totalWidth = $order->getTotalWidth();
 		$totalHeight = $order->getTotalHeight();
 		$totalLength = $order->getTotalLength();
 		$shippingAddress = Commerce_AddressRecord::model()->findById($order->shippingAddressId);
 		$updated = "";
-		if($shippingAddress)
+		if ($shippingAddress)
 		{
 			$updated = DateTimeHelper::toIso8601($shippingAddress->dateUpdated);
 		}
 
-		return md5($totalQty.$totalWeight.$totalHeight.$totalLength.$updated);
+		return md5($totalQty.$totalWeight.$totalWidth.$totalHeight.$totalLength.$updated);
 	}
 }

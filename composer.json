@@ -24,6 +24,7 @@
     },
     "require": {
         "easypost/easypost-php": "~3.0",
-        "dvdoug/boxpacker": "^1.5"
+        "dvdoug/boxpacker": "^1.5",
+        "triplepoint/php-units-of-measure": "^2.0"
     }
 }

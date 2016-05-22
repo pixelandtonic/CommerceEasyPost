@@ -2,7 +2,6 @@
 namespace CommerceEasyPost;
 
 use Commerce\Interfaces\ShippingMethod as CommerceShippingMethod;
-use Craft\StringHelper;
 
 class ShippingMethod implements CommerceShippingMethod
 {
@@ -25,6 +24,7 @@ class ShippingMethod implements CommerceShippingMethod
 		$titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/',
 			'$1 $2',
 			$intermediate);
+
 		return $titleStr;
 	}
 
@@ -68,7 +68,6 @@ class ShippingMethod implements CommerceShippingMethod
 	public function getCpEditUrl()
 	{
 		return "";
-//		return UrlHelper::getCpUrl("/easypost/carrieraccounts/".$this->getCarrier()->id);
 	}
 
 	/**
