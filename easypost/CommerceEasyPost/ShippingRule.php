@@ -29,7 +29,7 @@ class ShippingRule implements CommerceShippingRule
 		if ($settings->markup > 0 && $settings->markup <= 100)
 		{
 			$markupPercentage = $settings->markup / 100;
-			$this->_price = $rate->rate * $markupPercentage;
+			$this->_price = $rate->rate + ($rate->rate * $markupPercentage);
 		}
 		else
 		{
