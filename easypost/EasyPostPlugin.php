@@ -52,7 +52,7 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function getDocumentationUrl()
 	{
-		return 'https://github.com/pixelandtonic/easypost/blob/master/README.md';
+		return 'https://github.com/pixelandtonic/CommerceEasyPost/blob/master/README.md';
 	}
 
 	/**
@@ -60,7 +60,7 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function getReleaseFeedUrl()
 	{
-		return 'https://raw.githubusercontent.com/pixelandtonic/easypost/master/releases.json';
+		return 'https://raw.githubusercontent.com/pixelandtonic/CommerceEasyPost/master/releases.json';
 	}
 
 	/**
@@ -160,7 +160,7 @@ class EasyPostPlugin extends BasePlugin
 	{
 		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
 		{
-			
+
 			if ($order)
 			{
 				$rates = craft()->easyPost_rates->getRates($order);
