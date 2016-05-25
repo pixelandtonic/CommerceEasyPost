@@ -12,7 +12,7 @@ class ShippingMethod implements CommerceShippingMethod
 	public function __construct($rate)
 	{
 		$this->_rate = $rate;
-		$this->_handle = $rate->carrier_account_id."-".$rate->service;
+		$this->_handle = $rate->carrier_account_id;
 		$this->_name = $rate->carrier." - ".$this->camelToTitle($rate->service);
 	}
 

@@ -36,7 +36,12 @@ class EasyPost_RatesService extends BaseApplicationComponent
 
 		if ($shipment)
 		{
-			$rates = $shipment->rates;
+			$shipment->rates;
+
+			foreach ($shipment->rates as $rate)
+			{
+				$rates[$rate['carrier']] = $rate;
+			}
 		}
 
 		return $rates;
@@ -47,7 +52,7 @@ class EasyPost_RatesService extends BaseApplicationComponent
 		$signature = $this->_getSignature($order);
 
 		// Do we already have it on this request?
-		if (isset($this->_shipmentsBySignature[$signature]))
+		if (isset($this->_shipmentsBySignature[$signature]) && $this->_shipmentsBySignature[$signature] != false)
 		{
 			return $this->_shipmentsBySignature[$signature];
 		}
