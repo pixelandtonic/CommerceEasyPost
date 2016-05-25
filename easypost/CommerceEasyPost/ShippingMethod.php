@@ -16,18 +16,6 @@ class ShippingMethod implements CommerceShippingMethod
 		$this->_name = $rate->carrier." - ".$this->camelToTitle($rate->service);
 	}
 
-	private function camelToTitle($camelStr)
-	{
-		$intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/',
-			' $0',
-			$camelStr);
-		$titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/',
-			'$1 $2',
-			$intermediate);
-
-		return $titleStr;
-	}
-
 	/**
 	 * Returns the type of Shipping Method.
 	 * The core shipping methods have type: `Custom`. This is shown in the control panel only.
@@ -99,4 +87,18 @@ class ShippingMethod implements CommerceShippingMethod
 	{
 		return true;
 	}
+
+	// Helper for demo
+	private function camelToTitle($camelStr)
+	{
+		$intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/',
+			' $0',
+			$camelStr);
+		$titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/',
+			'$1 $2',
+			$intermediate);
+
+		return $titleStr;
+	}
+
 }
