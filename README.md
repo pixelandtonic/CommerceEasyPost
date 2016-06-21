@@ -6,20 +6,25 @@ Easy Post shipping plugin.
 
 Currently provides shipping options and quotes from your easypost.com account.
 
-## Installation
+## Setup
 
-To install Easy Post, follow these steps:
+1) Copy `config.php` from the `easypost` plugin folder to your `craft/config` folder and rename it to 
+`easypost.php`
+2) Replace the carrier IDs within the cofig with the carrier IDs that you wish to use from your easypost account.
+3) Remove service levels you do not wish to offer your customers.
+4) Install the plugin from the Craft control panel
+4) Add your test AND production keys to the easypost settings screen.
 
-1. Download & unzip the file and place the `easypost` directory into your `craft/plugins` directory
-2.  -OR- do a `git clone https://github.com/pixelandtonic/easypost.git` directly into your `craft/plugins` folder.  You can then update it with `git pull`
-3. Install plugin in the Craft Control Panel under Settings > Plugins
-4. The plugin folder should be named `easypost` for Craft to see it.  GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
+> The we require the product keys to get information about your carrier accounts. Otherwise only the test key will be used when in devMode.
+
+5) Visit the `commerce > settings > shipping methods` screen and confirm that
+the easy post shipping merthods are showing up.
 
 Easy Post works on Craft 2.5.x. and Craft Commerce 1.1.X
 
 TODO
 
-* Fine control over the shipping services available inside a Shipping Accounts.
+* Get a correct bin packing algorithm and supply correct sizes to easypost.
 * Purchase shipping labels
 * Shipping Tracking
 * Returns.
