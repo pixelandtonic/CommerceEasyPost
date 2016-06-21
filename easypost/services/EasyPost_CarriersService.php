@@ -48,4 +48,21 @@ class EasyPost_CarriersService extends BaseApplicationComponent
 		return $this->_allCarrierAccounts;
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function getCarrierAccountById($id)
+	{
+		$accounts = $this->getAllCarrierAccounts();
+
+		foreach ($accounts as $account)
+		{
+			if ($account->id = $id)
+			{
+				return $account;
+			}
+		}
+	}
 }

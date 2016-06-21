@@ -15,6 +15,7 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function init()
 	{
+
 		if (craft()->config->get('devMode'))
 		{
 			if (isset($this->settings['testApiKey']) && $this->settings['testApiKey'])
@@ -104,30 +105,6 @@ class EasyPostPlugin extends BasePlugin
 	}
 
 	/**
-	 */
-	public function onBeforeInstall()
-	{
-	}
-
-	/**
-	 */
-	public function onAfterInstall()
-	{
-	}
-
-	/**
-	 */
-	public function onBeforeUninstall()
-	{
-	}
-
-	/**
-	 */
-	public function onAfterUninstall()
-	{
-	}
-
-	/**
 	 * @return mixed
 	 */
 	public function getSettingsHtml()
@@ -158,23 +135,27 @@ class EasyPostPlugin extends BasePlugin
 	 */
 	public function commerce_registerShippingMethods($order = null)
 	{
-		if (isset($this->settings['apiKey']) && $this->settings['apiKey'])
+		if (isset($this->settings['apiKey']) && $this->settings['testApiKey'])
 		{
-
+			// Don't bother returning all shipping methods when we are in the context of an order, only those that match.
 			if ($order)
 			{
+				$carrierAccountsConfig = craft()->config->get('carrierAccounts', 'easypost');
+
 				$rates = craft()->easyPost_rates->getRates($order);
 				$shippingMethods = [];
 				foreach ($rates as $rate)
 				{
-					$shippingMethods[] = new ShippingMethod($rate);
+					$services = $carrierAccountsConfig[$rate->carrier_account_id]['services'];
+					$carrier = craft()->easyPost_carriers->getCarrierAccountById($rate->carrier_account_id);
+					$shippingMethods[] = new ShippingMethod($carrier, ['handle' => $rate->service, 'name' => $services[$rate->service]], $rate);
 				}
 
 				return $shippingMethods;
 			}
 
 			// return the display shipping methods. These never match the order
-			// and are only used for display purposes.
+			// and are only used for display purposes in the CP.
 			return craft()->easyPost_shippingMethods->getAllShippingMethods();
 		}
 	}

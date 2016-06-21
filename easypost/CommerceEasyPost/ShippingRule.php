@@ -14,26 +14,33 @@ class ShippingRule implements CommerceShippingRule
 	/**
 	 * ShippingRule constructor.
 	 *
+	 * @param      $carrier
+	 * @param      $service
+	 * @param null $rate
 	 */
-	public function __construct($rate)
+	public function __construct($carrier, $service, $rate = null)
 	{
-		$this->_description = StringHelper::uppercaseFirst($rate->service);
-		if ($rate->delivery_days)
+
+		$this->_description = StringHelper::uppercaseFirst($service['name']);
+		$this->_rate = $rate;
+
+		if ($rate && $rate->delivery_days)
 		{
 			$this->_description = "Delivered in ".$rate->delivery_days." days. ".$rate->service;
 		}
 
-		$this->_rate = $rate;
-
-		$settings = \Craft\craft()->plugins->getPlugin('easypost')->getSettings();
-		if ($settings->markup > 0 && $settings->markup <= 100)
+		if ($this->_rate)
 		{
-			$markupPercentage = $settings->markup / 100;
-			$this->_price = $rate->rate + ($rate->rate * $markupPercentage);
-		}
-		else
-		{
-			$this->_price = $rate->rate;
+			$settings = \Craft\craft()->plugins->getPlugin('easypost')->getSettings();
+			if ($settings->markup > 0 && $settings->markup <= 100)
+			{
+				$markupPercentage = $settings->markup / 100;
+				$this->_price = $rate->rate + ($rate->rate * $markupPercentage);
+			}
+			else
+			{
+				$this->_price = $rate->rate;
+			}
 		}
 	}
 
@@ -44,7 +51,11 @@ class ShippingRule implements CommerceShippingRule
 	 */
 	public function matchOrder(\Craft\Commerce_OrderModel $order)
 	{
-		return true;
+		if($this->_rate)
+		{
+			return true;
+		}
+
 	}
 
 	/**

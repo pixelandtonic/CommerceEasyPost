@@ -58,7 +58,7 @@ class EasyPost_RatesService extends BaseApplicationComponent
 		}
 
 		$cacheKey = 'easypost-shipment-'.$signature;
-		// Is it in the cache, if not, get it from the api?
+		// Is it in the cache? if not, get it from the api.
 		$shipment = craft()->cache->get($cacheKey);
 
 		if (!$shipment)
@@ -104,19 +104,20 @@ class EasyPost_RatesService extends BaseApplicationComponent
 
 		$settings = craft()->plugins->getPlugin('commerce')->getSettings();
 
+		// TODO: Move this to box packing algorithm
 		$length = new Length($order->getTotalLength(), $settings->dimensionUnits);
 		$width = new Length($order->getTotalWidth(), $settings->dimensionUnits);
 		$height = new Length($order->getTotalHeight(), $settings->dimensionUnits);
 		$weight = new Mass($order->getTotalWeight(), $settings->weightUnits);
 
-		$parcel_params = ["length"             => $length->toUnit('inch'),
-		                  "width"              => $width->toUnit('inch'),
-		                  "height"             => $height->toUnit('inch'),
+		$parcel_params = ["length"             => $length->toUnit('inch') ?: 0.1,
+		                  "width"              => $width->toUnit('inch') ?: 0.1,
+		                  "height"             => $height->toUnit('inch') ?: 0.1,
 		                  "predefined_package" => null,
 		                  "weight"             => $weight->toUnit('ounce')
 		];
 
-		if ($parcel_params['weight'] == 0 || $parcel_params['length'] == 0 || $parcel_params['height'] == 0 || $parcel_params['width'] == 0)
+		if ($parcel_params['weight'] == 0)
 		{
 			return false;
 		}

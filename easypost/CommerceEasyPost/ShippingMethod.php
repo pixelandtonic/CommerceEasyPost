@@ -8,12 +8,16 @@ class ShippingMethod implements CommerceShippingMethod
 	private $_rate;
 	private $_handle;
 	private $_name;
+	private $_carrier;
+	private $_service;
 
-	public function __construct($rate)
+	public function __construct($carrier, $service, $rate = null)
 	{
 		$this->_rate = $rate;
-		$this->_handle = $rate->carrier_account_id;
-		$this->_name = $rate->carrier." - ".$this->camelToTitle($rate->service);
+		$this->_carrier = $carrier;
+		$this->_service = $service;
+		$this->_handle = $carrier->id.$service['handle'];
+		$this->_name = $carrier->readable." - ".$service['name'];
 	}
 
 	/**
@@ -65,7 +69,9 @@ class ShippingMethod implements CommerceShippingMethod
 	 */
 	public function getRules()
 	{
-		return [new ShippingRule($this->_rate)];
+
+		return [new ShippingRule($this->_carrier, $this->_service, $this->_rate)];
+
 	}
 
 	/**
@@ -87,18 +93,4 @@ class ShippingMethod implements CommerceShippingMethod
 	{
 		return true;
 	}
-
-	// Helper for demo
-	private function camelToTitle($camelStr)
-	{
-		$intermediate = preg_replace('/(?!^)([[:upper:]][[:lower:]]+)/',
-			' $0',
-			$camelStr);
-		$titleStr = preg_replace('/(?!^)([[:lower:]])([[:upper:]])/',
-			'$1 $2',
-			$intermediate);
-
-		return $titleStr;
-	}
-
 }
