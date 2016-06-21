@@ -1,5 +1,7 @@
 # Easy Post plugin for Craft CMS
 
+⚠️ This is an alpha, expect bugs. It is being shared to assist community developers.
+
 Easy Post shipping plugin.
 
 Currently provides shipping options and quotes from your easypost.com account.
