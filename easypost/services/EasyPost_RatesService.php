@@ -40,7 +40,7 @@ class EasyPost_RatesService extends BaseApplicationComponent
 
 			foreach ($shipment->rates as $rate)
 			{
-				$rates[$rate['carrier']] = $rate;
+				$rates[] = $rate;
 			}
 		}
 
