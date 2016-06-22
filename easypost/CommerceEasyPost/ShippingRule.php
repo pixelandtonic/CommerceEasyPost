@@ -20,17 +20,16 @@ class ShippingRule implements CommerceShippingRule
 	 */
 	public function __construct($carrier, $service, $rate = null)
 	{
-
-		$this->_description = StringHelper::uppercaseFirst($service['name']);
+		$this->_description = $service['name'];
 		$this->_rate = $rate;
-
-		if ($rate && $rate->delivery_days)
-		{
-			$this->_description = "Delivered in ".$rate->delivery_days." days. ".$rate->service;
-		}
 
 		if ($this->_rate)
 		{
+			if ($this->_rate->delivery_days)
+			{
+				$this->_description = $this->_description . ". Delivered in ".$rate->delivery_days." days. ";
+			}
+
 			$settings = \Craft\craft()->plugins->getPlugin('easypost')->getSettings();
 			$rateType = \Craft\craft()->config->get('useRate','easypost');
 			$amount = $rate->{$rateType};
