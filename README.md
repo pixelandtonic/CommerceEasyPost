@@ -4,6 +4,10 @@
 
 Currently provides shipping options and quotes from your easypost.com account.
 
+## Download
+
+Use the releases page to download the plugin with dependancies.
+
 ## Setup
 
 1) Copy `config.php` from the `easypost` plugin folder to your `craft/config` folder and rename it to 
