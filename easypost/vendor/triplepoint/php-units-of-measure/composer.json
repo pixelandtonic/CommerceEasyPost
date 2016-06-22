@@ -1,0 +1,52 @@
+{
+    "name":        "php-units-of-measure/php-units-of-measure",
+
+    "description": "A PHP library for converting between standard units of measure.",
+
+    "keywords": [
+         "measurements", "data", "conversion"
+     ],
+
+    "homepage":    "https://github.com/PhpUnitsOfMeasure/php-units-of-measure",
+
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name":     "Jonathan Hanson",
+            "email":    "jonathan@jonathan-hanson.org",
+            "homepage": "http://www.jonathan-hanson.org/",
+            "role":     "Developer"
+        }
+    ],
+
+    "support": {
+        "email":  "jonathan@jonathan-hanson.org",
+        "issues": "https://github.com/PhpUnitsOfMeasure/php-units-of-measure/issues",
+        "source": "https://github.com/PhpUnitsOfMeasure/php-units-of-measure"
+    },
+
+    "require": {
+        "php": ">=5.4.0"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit":           "4.8.*",
+        "squizlabs/php_codesniffer": "2.2.*"
+    },
+
+    "replace": {
+        "triplepoint/php-units-of-measure": "*"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "PhpUnitsOfMeasure\\": "source/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+             "PhpUnitsOfMeasureTest\\": "tests/"
+        }
+    }
+}

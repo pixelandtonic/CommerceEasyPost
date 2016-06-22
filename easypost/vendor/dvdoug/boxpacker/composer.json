@@ -1,0 +1,27 @@
+{
+    "name": "dvdoug/boxpacker",
+    "description": "An implementation of the 3D bin packing/knapsack problem (aka creating parcels by putting items into boxes)",
+    "keywords": ["packing","binpacking","bin packing","knapsack","box","boxpacking","parcel","parcelpacking","shipping","packaging","boxes", "container"],
+    "homepage": "https://github.com/dvdoug/BoxPacker",
+    "authors": [
+        {
+            "name": "Doug Wright",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0",
+        "psr/log": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.3",
+        "monolog/monolog": "~1.11",
+        "squizlabs/php_codesniffer": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "DVDoug\\BoxPacker\\": ""
+        }
+    }
+}
