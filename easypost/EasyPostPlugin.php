@@ -144,8 +144,19 @@ class EasyPostPlugin extends BasePlugin
 
 				$rates = craft()->easyPost_rates->getRates($order);
 				$shippingMethods = [];
+
+				if (craft()->config->get('devMode'))
+				{
+					$this::log('Rates for Order #'.$order->id." (Order Number: ".$order->number);
+				}
+
 				foreach ($rates as $rate)
 				{
+					if (craft()->config->get('devMode'))
+					{
+						$this::log('Rate: '. $rate);
+					}
+
 					$services = $carrierAccountsConfig[$rate->carrier_account_id]['services'];
 					$carrier = craft()->easyPost_carriers->getCarrierAccountById($rate->carrier_account_id);
 
