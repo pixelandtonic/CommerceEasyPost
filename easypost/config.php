@@ -1,6 +1,11 @@
 <?php
 
 return [
+	//	Possible rates types available at https://www.easypost.com/docs/api#rates
+	// list_rate. rate, retail_rate etc
+	'useRate' => 'rate',
+
+	// The address you will be posting from.
 	'fromAddress'     => ["name"    => "Jon Calhoun",
 	                      "street1" => "388 Townsend St",
 	                      "street2" => "Apt 20",
@@ -8,6 +13,9 @@ return [
 	                      "state"   => "CA",
 	                      "zip"     => "94107",
 	                      "phone"   => "323-855-0394"],
+
+	// You can find the service levels here: https://www.easypost.com/docs/api#service-levels
+	// The easypost accounts you want to make available and the servive levels you want to make available
 	'carrierAccounts' => [
 		'ca_04ef65ec88434fcca8c8afb1c1b68d5e' => [ //USPS
 			'services' => [

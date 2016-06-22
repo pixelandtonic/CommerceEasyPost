@@ -32,14 +32,17 @@ class ShippingRule implements CommerceShippingRule
 		if ($this->_rate)
 		{
 			$settings = \Craft\craft()->plugins->getPlugin('easypost')->getSettings();
+			$config = \Craft\craft()->config->get('useRate','easypost');
+			$rate = $config['useRate'];
+			$amount = $rate->{$rate};
 			if ($settings->markup > 0 && $settings->markup <= 100)
 			{
 				$markupPercentage = $settings->markup / 100;
-				$this->_price = $rate->rate + ($rate->rate * $markupPercentage);
+				$this->_price = $amount + ($amount * $markupPercentage);
 			}
 			else
 			{
-				$this->_price = $rate->rate;
+				$this->_price = $amount;
 			}
 		}
 	}
