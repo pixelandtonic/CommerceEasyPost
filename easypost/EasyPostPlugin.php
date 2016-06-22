@@ -148,7 +148,8 @@ class EasyPostPlugin extends BasePlugin
 				{
 					$services = $carrierAccountsConfig[$rate->carrier_account_id]['services'];
 					$carrier = craft()->easyPost_carriers->getCarrierAccountById($rate->carrier_account_id);
-					if (isset($services[$rate->service]))
+
+					if ($carrier && isset($services[$rate->service]))
 					{
 						$shippingMethods[] = new ShippingMethod($carrier, ['handle' => $rate->service, 'name' => $services[$rate->service]], $rate);
 					}
