@@ -162,7 +162,7 @@ class EasyPostPlugin extends BasePlugin
 
 					if ($carrier && isset($services[$rate->service]))
 					{
-						$shippingMethods[] = new ShippingMethod($carrier, ['handle' => $rate->service, 'name' => $services[$rate->service]], $rate);
+						$shippingMethods[] = new ShippingMethod($carrier, ['handle' => $rate->service, 'name' => $services[$rate->service]], $rate, $order);
 					}
 				}
 

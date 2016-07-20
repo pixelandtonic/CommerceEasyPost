@@ -10,6 +10,7 @@ class ShippingRule implements CommerceShippingRule
 	private $_description;
 	private $_price;
 	private $_rate;
+	private $_order;
 
 	/**
 	 * ShippingRule constructor.
@@ -18,10 +19,11 @@ class ShippingRule implements CommerceShippingRule
 	 * @param      $service
 	 * @param null $rate
 	 */
-	public function __construct($carrier, $service, $rate = null)
+	public function __construct($carrier, $service, $rate = null, $order = null)
 	{
 		$this->_description = $service['name'];
 		$this->_rate = $rate;
+		$this->_order = $order;
 
 		if ($this->_rate)
 		{
@@ -42,6 +44,25 @@ class ShippingRule implements CommerceShippingRule
 			{
 				$this->_price = $amount;
 			}
+
+
+			$modifyPrice = \Craft\craft()->config->get('modifyPrice','easypost');
+
+			if($modifyPrice)
+			{
+				if(is_callable($modifyPrice)){
+					$this->_price = call_user_func_array($modifyPrice,[
+						'shippingMethod'=>$rate->carrier_account_id,
+						'order' => $this->_order,
+						'price'=>$this->_price]);
+				}else{
+					$this->_price = $modifyPrice;
+				}
+			}
+
+
+			
+			
 		}
 	}
 

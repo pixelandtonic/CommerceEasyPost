@@ -15,7 +15,7 @@ return [
 	                      "phone"   => "323-855-0394"],
 
 	// You can find the service levels here: https://www.easypost.com/docs/api#service-levels
-	// The easypost accounts you want to make available and the servive levels you want to make available
+	// The easypost carrier accounts and their service levels you want to make available
 	'carrierAccounts' => [
 		'ca_04ef65ec88434fcca8c8afb1c1b68d5e' => [ //USPS
 			'services' => [
@@ -61,5 +61,21 @@ return [
 				"UPSStandard"       => "UPS Standard (UPS)"
 			]
 		]
-	]
+	],
+	// This setting can change the price of any rate returned from easypost
+	// The shipping method handle is the combination of carrier account id and service level id
+	// e.g  ca_3e8a353b7b6c49089125804d6ae51319ExpressPlus
+	'modifyPrice' => function($shippingMethodHandle, $order, $price){
+
+		// Example of modifying the price based on order totalPrice
+		/*
+		if($order->totalPrice >= 100)
+		{
+			return $price + 10;
+		}
+		return $price + 5;
+		*/
+
+		return $price;
+	}
 ];

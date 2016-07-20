@@ -10,12 +10,14 @@ class ShippingMethod implements CommerceShippingMethod
 	private $_name;
 	private $_carrier;
 	private $_service;
+	private $_order;
 
-	public function __construct($carrier, $service, $rate = null)
+	public function __construct($carrier, $service, $rate = null, $order = null)
 	{
 		$this->_rate = $rate;
 		$this->_carrier = $carrier;
 		$this->_service = $service;
+		$this->_order = $order;
 		$this->_handle = $carrier->id.$service['handle'];
 		$this->_name = $carrier->readable." - ".$service['name'];
 	}
@@ -70,7 +72,7 @@ class ShippingMethod implements CommerceShippingMethod
 	public function getRules()
 	{
 
-		return [new ShippingRule($this->_carrier, $this->_service, $this->_rate)];
+		return [new ShippingRule($this->_carrier, $this->_service, $this->_rate, $this->_order)];
 
 	}
 
