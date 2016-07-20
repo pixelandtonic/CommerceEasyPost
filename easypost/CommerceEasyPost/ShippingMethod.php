@@ -73,7 +73,6 @@ class ShippingMethod implements CommerceShippingMethod
 	{
 
 		return [new ShippingRule($this->_carrier, $this->_service, $this->_rate, $this->_order)];
-
 	}
 
 	/**

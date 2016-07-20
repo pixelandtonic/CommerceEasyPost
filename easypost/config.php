@@ -3,7 +3,7 @@
 return [
 	//	Possible rates types available at https://www.easypost.com/docs/api#rates
 	// list_rate. rate, retail_rate etc
-	'useRate' => 'rate',
+	'useRate'         => 'rate',
 
 	// The address you will be posting from.
 	'fromAddress'     => ["name"    => "Jon Calhoun",
@@ -65,7 +65,8 @@ return [
 	// This setting can change the price of any rate returned from easypost
 	// The shipping method handle is the combination of carrier account id and service level id
 	// e.g  ca_3e8a353b7b6c49089125804d6ae51319ExpressPlus
-	'modifyPrice' => function($shippingMethodHandle, $order, $price){
+	'modifyPrice'     => function ($shippingMethodHandle, $order, $price)
+	{
 
 		// Example of modifying the price based on order totalPrice
 		/*

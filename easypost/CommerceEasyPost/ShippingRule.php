@@ -29,11 +29,11 @@ class ShippingRule implements CommerceShippingRule
 		{
 			if ($this->_rate->delivery_days)
 			{
-				$this->_description = $this->_description . ". Delivered in ".$rate->delivery_days." days. ";
+				$this->_description = $this->_description.". Delivered in ".$rate->delivery_days." days. ";
 			}
 
 			$settings = \Craft\craft()->plugins->getPlugin('easypost')->getSettings();
-			$rateType = \Craft\craft()->config->get('useRate','easypost');
+			$rateType = \Craft\craft()->config->get('useRate', 'easypost');
 			$amount = $rate->{$rateType};
 			if ($settings->markup > 0 && $settings->markup <= 100)
 			{
@@ -46,23 +46,22 @@ class ShippingRule implements CommerceShippingRule
 			}
 
 
-			$modifyPrice = \Craft\craft()->config->get('modifyPrice','easypost');
+			$modifyPrice = \Craft\craft()->config->get('modifyPrice', 'easypost');
 
-			if($modifyPrice)
+			if ($modifyPrice)
 			{
-				if(is_callable($modifyPrice)){
-					$this->_price = call_user_func_array($modifyPrice,[
-						'shippingMethod'=>$rate->carrier_account_id,
-						'order' => $this->_order,
-						'price'=>$this->_price]);
-				}else{
+				if (is_callable($modifyPrice))
+				{
+					$this->_price = call_user_func_array($modifyPrice, [
+						'shippingMethod' => $rate->carrier_account_id,
+						'order'          => $this->_order,
+						'price'          => $this->_price]);
+				}
+				else
+				{
 					$this->_price = $modifyPrice;
 				}
 			}
-
-
-			
-			
 		}
 	}
 
@@ -73,11 +72,10 @@ class ShippingRule implements CommerceShippingRule
 	 */
 	public function matchOrder(\Craft\Commerce_OrderModel $order)
 	{
-		if($this->_rate)
+		if ($this->_rate)
 		{
 			return true;
 		}
-
 	}
 
 	/**

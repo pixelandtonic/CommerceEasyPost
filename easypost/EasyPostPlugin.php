@@ -154,7 +154,7 @@ class EasyPostPlugin extends BasePlugin
 				{
 					if (craft()->config->get('devMode'))
 					{
-						$this::log('Rate: '. $rate);
+						$this::log('Rate: '.$rate);
 					}
 
 					$services = $carrierAccountsConfig[$rate->carrier_account_id]['services'];
