@@ -17,7 +17,7 @@ Currently provides shipping options and quotes from your easypost.com account.
 
 4) Add your test AND production keys to the easypost settings screen.
 
-> We require the production key to get information about your carrier accounts. A part from that, only the test key will be used when in devMode.
+> We require the production key to get information about your carrier accounts. Apart from that, only the test key will be used when in devMode.
 
 5) Visit the `commerce > settings > shipping methods` screen and confirm that
 the easy post shipping merthods are showing up.
