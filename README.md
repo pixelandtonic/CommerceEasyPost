@@ -4,6 +4,16 @@
 
 Currently provides shipping options and quotes from your easypost.com account.
 
+Easypost includes carriers such as:
+
+- USPS
+- UPS
+- FedEx
+- DHL eCommerce
+- DHL Express
+- Canada Post
+- Royal Mail
+
 ## Setup
 
 1) Copy `config.php` from the `easypost` plugin folder to your `craft/config` folder and rename it to 
