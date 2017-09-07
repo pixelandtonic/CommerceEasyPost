@@ -17,7 +17,7 @@ require(dirname(__FILE__) . '/EasyPost/Error.php');
 
 // Guts
 require(dirname(__FILE__) . '/EasyPost/Object.php');
-require(dirname(__FILE__) . '/EasyPost/Resource.php');
+require(dirname(__FILE__) . '/EasyPost/EasypostResource.php');
 require(dirname(__FILE__) . '/EasyPost/Requestor.php');
 
 // API Resources
@@ -40,4 +40,7 @@ require(dirname(__FILE__) . '/EasyPost/ScanForm.php');
 require(dirname(__FILE__) . '/EasyPost/Shipment.php');
 require(dirname(__FILE__) . '/EasyPost/Tracker.php');
 require(dirname(__FILE__) . '/EasyPost/User.php');
+require(dirname(__FILE__) . '/EasyPost/Insurance.php');
+require(dirname(__FILE__) . '/EasyPost/Report.php');
+require(dirname(__FILE__) . '/EasyPost/Webhook.php');
 

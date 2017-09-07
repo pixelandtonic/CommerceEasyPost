@@ -56,6 +56,7 @@ print_r($rate);
 $created_rates = \EasyPost\Rate::create($shipment);
 print_r($created_rates);
 
+
 print_r(\EasyPost\Shipment::retrieve($shipment));
 
 $shipment = \EasyPost\Shipment::retrieve(array('id' => "shp_iUXLz4n0"));

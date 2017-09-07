@@ -4,14 +4,15 @@
  * @package BoxPacker
  * @author Doug Wright
  */
-  namespace DVDoug\BoxPacker;
+namespace DVDoug\BoxPacker;
 
-  /**
-   * List of possible packed box choices, ordered by utilisation (item count, volume)
-   * @author Doug Wright
-   * @package BoxPacker
-   */
-  class PackedBoxList extends \SplMinHeap {
+/**
+ * List of possible packed box choices, ordered by utilisation (item count, volume)
+ * @author Doug Wright
+ * @package BoxPacker
+ */
+class PackedBoxList extends \SplMinHeap
+{
 
     /**
      * Average (mean) weight of boxes
@@ -20,56 +21,62 @@
     protected $meanWeight;
 
     /**
-     * Variance in weight between boxes
-     * @var float
-     */
-    protected $weightVariance;
-
-    /**
      * Compare elements in order to place them correctly in the heap while sifting up.
      * @see \SplMinHeap::compare()
+     *
+     * @param PackedBox $boxA
+     * @param PackedBox $boxB
+     *
+     * @return int
      */
-    public function compare($aBoxA, $aBoxB) {
-      $choice = $aBoxA->getItems()->count() - $aBoxB->getItems()->count();
-      if ($choice === 0) {
-        $choice = $aBoxB->getBox()->getInnerVolume() - $aBoxA->getBox()->getInnerVolume();
-      }
-      if ($choice === 0) {
-        $choice = $aBoxA->getWeight() - $aBoxB->getWeight();
-      }
-      return $choice;
+    public function compare($boxA, $boxB)
+    {
+        $choice = $boxA->getItems()->count() - $boxB->getItems()->count();
+        if ($choice === 0) {
+            $choice = $boxB->getBox()->getInnerVolume() - $boxA->getBox()->getInnerVolume();
+        }
+        if ($choice === 0) {
+            $choice = $boxA->getWeight() - $boxB->getWeight();
+        }
+        return $choice;
     }
 
     /**
      * Reversed version of compare
+     *
+     * @param PackedBox $boxA
+     * @param PackedBox $boxB
+     *
      * @return int
      */
-    public function reverseCompare($aBoxA, $aBoxB) {
-      $choice = $aBoxB->getItems()->count() - $aBoxA->getItems()->count();
-      if ($choice === 0) {
-        $choice = $aBoxA->getBox()->getInnerVolume() - $aBoxB->getBox()->getInnerVolume();
-      }
-      if ($choice === 0) {
-        $choice = $aBoxB->getWeight() - $aBoxA->getWeight();
-      }
-      return $choice;
+    public function reverseCompare($boxA, $boxB)
+    {
+        $choice = $boxB->getItems()->count() - $boxA->getItems()->count();
+        if ($choice === 0) {
+            $choice = $boxA->getBox()->getInnerVolume() - $boxB->getBox()->getInnerVolume();
+        }
+        if ($choice === 0) {
+            $choice = $boxB->getWeight() - $boxA->getWeight();
+        }
+        return $choice;
     }
 
     /**
      * Calculate the average (mean) weight of the boxes
      * @return float
      */
-    public function getMeanWeight() {
+    public function getMeanWeight()
+    {
 
-      if (!is_null($this->meanWeight)) {
-        return $this->meanWeight;
-      }
+        if (!is_null($this->meanWeight)) {
+            return $this->meanWeight;
+        }
 
-      foreach (clone $this as $box) {
-        $this->meanWeight += $box->getWeight();
-      }
+        foreach (clone $this as $box) {
+            $this->meanWeight += $box->getWeight();
+        }
 
-      return $this->meanWeight /= $this->count();
+        return $this->meanWeight /= $this->count();
 
     }
 
@@ -77,19 +84,16 @@
      * Calculate the variance in weight between these boxes
      * @return float
      */
-    public function getWeightVariance() {
+    public function getWeightVariance()
+    {
+        $mean = $this->getMeanWeight();
 
-      if (!is_null($this->weightVariance)) {
-        return $this->weightVariance;
-      }
+        $weightVariance = 0;
+        foreach (clone $this as $box) {
+            $weightVariance += pow($box->getWeight() - $mean, 2);
+        }
 
-      $mean = $this->getMeanWeight();
-
-      foreach (clone $this as $box) {
-        $this->weightVariance += pow($box->getWeight() - $mean, 2);
-      }
-
-      return $this->weightVariance /= $this->count();
+        return $weightVariance / $this->count();
 
     }
 
@@ -97,31 +101,32 @@
      * Get volume utilisation of the set of packed boxes
      * @return float
      */
-    public function getVolumeUtilisation() {
-      $itemVolume = 0;
-      $boxVolume = 0;
+    public function getVolumeUtilisation()
+    {
+        $itemVolume = 0;
+        $boxVolume = 0;
 
-      /** @var PackedBox $box */
-      foreach (clone $this as $box) {
-        $boxVolume += $box->getBox()->getInnerVolume();
+        /** @var PackedBox $box */
+        foreach (clone $this as $box) {
+            $boxVolume += $box->getBox()->getInnerVolume();
 
-        /** @var Item $item */
-        foreach (clone $box->getItems() as $item ) {
-          $itemVolume += $item->getVolume();
+            /** @var PackedItem $item */
+            foreach (clone $box->getItems() as $item) {
+                $itemVolume += $item->getVolume();
+            }
         }
-      }
 
-      return round($itemVolume / $boxVolume * 100, 1);
+        return round($itemVolume / $boxVolume * 100, 1);
     }
 
     /**
      * Do a bulk insert
-     * @param array $aBoxes
+     * @param array $boxes
      */
-    public function insertFromArray(array $aBoxes) {
-      foreach ($aBoxes as $box) {
-        $this->insert($box);
-      }
+    public function insertFromArray(array $boxes)
+    {
+        foreach ($boxes as $box) {
+            $this->insert($box);
+        }
     }
-
-  }
+}

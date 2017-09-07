@@ -2,7 +2,7 @@
 
 namespace EasyPost;
 
-class Tracker extends Resource
+class Tracker extends EasypostResource
 {
     /**
      * retrieve a tracker
@@ -58,6 +58,27 @@ class Tracker extends Resource
         }
 
         return self::_create(get_class(), $params, $apiKey);
+    }
+
+    /**
+     * create a list of trackers
+     *
+     * @param mixed  $params
+     * @param string $apiKey
+     * @return mixed
+     */
+    public static function create_list($params = null, $apiKey = null)
+    {
+        $class = get_class();
+        if (!isset($params['trackers']) || !is_array($params['trackers'])) {
+            $clone = $params;
+            unset($params);
+            $params['trackers'] = $clone;
+        }
+
+        $requestor = new Requestor($apiKey);
+        $url = self::classUrl($class);
+        list($response, $apiKey) = $requestor->request('post', $url.'/create_list', $params);
     }
 }
 

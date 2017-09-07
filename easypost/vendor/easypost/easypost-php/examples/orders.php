@@ -3,7 +3,6 @@
 require_once("../lib/easypost.php");
 
 \EasyPost\EasyPost::setApiKey('cueqNZUb3ldeWTNX7MU3Mel8UXtaAMUi');
-\EasyPost\EasyPost::setApiBase('http://easypost-vm:5000/v2');
 
 $sf = array(
     "name"    => "EasyPost.com",
@@ -39,6 +38,10 @@ $order = \EasyPost\Order::create(array(
     ),
 ));
 
+echo($order->shipments[0]->rates[0]->id . "\n");
+$order->get_rates();
+echo($order->shipments[0]->rates[0]->id . "\n");
+
 $order->buy(array("carrier" => "UPS", "service" => "Ground"));
 
-print_r($order);
+echo($order->id . "\n");

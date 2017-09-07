@@ -2,7 +2,7 @@
 
 namespace EasyPost;
 
-class Address extends Resource
+class Address extends EasypostResource
 {
     /**
      * retrieve an address
@@ -50,11 +50,17 @@ class Address extends Resource
         $urlMod = "";
 
         if ((isset($params['verify']) && is_array($params['verify'])) || (isset($params['verify_strict']) && is_array($params['verify_strict']))) {
-            $verify = $params['verify'];
-            unset($params['verify']);
+            $verify = "";
+            if (isset($params['verify'])) {
+                $verify = $params['verify'];
+                unset($params['verify']);
+            }
 
-            $verify_strict = $params['verify_strict'];
-            unset($params['verify_strict']);
+            $verify_strict = "";
+            if (isset($params['verify_strict'])) {
+                $verify_strict = $params['verify_strict'];
+                unset($params['verify_strict']);
+            }
 
             $urlMod = "?";
 
