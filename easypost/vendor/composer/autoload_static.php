@@ -33,11 +33,11 @@ class ComposerStaticInit4b592db52436cc328f117d986390d4bb
         ),
         'DVDoug\\BoxPacker\\' => 
         array (
-            0 => __DIR__ . '/..' . '/dvdoug/boxpacker',
+            0 => __DIR__ . '/..' . '/dvdoug/boxpacker/src',
         ),
         'CommerceEasyPost\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/easypost/CommerceEasyPost',
+            0 => __DIR__ . '/../..' . '/CommerceEasyPost',
         ),
     );
 

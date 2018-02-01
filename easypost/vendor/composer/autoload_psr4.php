@@ -8,6 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PhpUnitsOfMeasure\\' => array($vendorDir . '/triplepoint/php-units-of-measure/source'),
-    'DVDoug\\BoxPacker\\' => array($vendorDir . '/dvdoug/boxpacker'),
-    'CommerceEasyPost\\' => array($baseDir . '/easypost/CommerceEasyPost'),
+    'DVDoug\\BoxPacker\\' => array($vendorDir . '/dvdoug/boxpacker/src'),
+    'CommerceEasyPost\\' => array($baseDir . '/CommerceEasyPost'),
 );

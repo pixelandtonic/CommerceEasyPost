@@ -1,19 +1,19 @@
 <?php
 /**
- * Box packing (3D bin packing, knapsack problem)
- * @package BoxPacker
+ * Box packing (3D bin packing, knapsack problem).
+ *
  * @author Doug Wright
  */
+
 namespace DVDoug\BoxPacker;
 
 /**
- * List of items to be packed, ordered by volume
+ * List of items to be packed, ordered by volume.
+ *
  * @author Doug Wright
- * @package BoxPacker
  */
 class ItemList extends \SplMaxHeap
 {
-
     /**
      * Compare elements in order to place them correctly in the heap while sifting up.
      *
@@ -30,13 +30,18 @@ class ItemList extends \SplMaxHeap
             return 1;
         } elseif ($itemA->getVolume() < $itemB->getVolume()) {
             return -1;
-        } else {
+        } elseif ($itemA->getWeight() !== $itemB->getWeight()) {
             return $itemA->getWeight() - $itemB->getWeight();
+        } elseif ($itemA->getDescription() < $itemB->getDescription()) {
+            return 1;
+        } else {
+            return -1;
         }
     }
 
     /**
-     * Get copy of this list as a standard PHP array
+     * Get copy of this list as a standard PHP array.
+     *
      * @return array
      */
     public function asArray()
@@ -45,6 +50,7 @@ class ItemList extends \SplMaxHeap
         foreach (clone $this as $item) {
             $return[] = $item;
         }
+
         return $return;
     }
 }

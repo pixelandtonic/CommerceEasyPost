@@ -1,53 +1,5 @@
 [
     {
-        "name": "easypost/easypost-php",
-        "version": "3.3.3",
-        "version_normalized": "3.3.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/EasyPost/easypost-php.git",
-            "reference": "082c875effcc1736f3c011c3495a0f6d80e99809"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/EasyPost/easypost-php/zipball/082c875effcc1736f3c011c3495a0f6d80e99809",
-            "reference": "082c875effcc1736f3c011c3495a0f6d80e99809",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2017-02-15T02:27:13+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "EasyPost": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Sawyer Bateman"
-            }
-        ],
-        "description": "EasyPost Shipping API Client Library for PHP",
-        "homepage": "https://github.com/EasyPost/easypost-php",
-        "keywords": [
-            "api",
-            "easypost",
-            "shipping"
-        ]
-    },
-    {
         "name": "psr/log",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -94,65 +46,6 @@
             "log",
             "psr",
             "psr-3"
-        ]
-    },
-    {
-        "name": "dvdoug/boxpacker",
-        "version": "1.6.1",
-        "version_normalized": "1.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/dvdoug/BoxPacker.git",
-            "reference": "fa93b468f36491731af79f4a2d58cf856c67e0bf"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/dvdoug/BoxPacker/zipball/fa93b468f36491731af79f4a2d58cf856c67e0bf",
-            "reference": "fa93b468f36491731af79f4a2d58cf856c67e0bf",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0",
-            "psr/log": "^1.0"
-        },
-        "require-dev": {
-            "monolog/monolog": "^1.11",
-            "phpunit/phpunit": "^4.8.35||^5.0||^6.0",
-            "squizlabs/php_codesniffer": "^2.5"
-        },
-        "time": "2017-09-04T19:19:54+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "DVDoug\\BoxPacker\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Doug Wright",
-                "role": "Developer"
-            }
-        ],
-        "description": "An implementation of the 3D (actually 4D) bin packing/knapsack problem (aka creating parcels by putting items into boxes)",
-        "homepage": "http://boxpacker.io/",
-        "keywords": [
-            "bin packing",
-            "binpacking",
-            "box",
-            "boxes",
-            "boxpacking",
-            "container",
-            "knapsack",
-            "packaging",
-            "packing",
-            "parcel",
-            "parcelpacking",
-            "shipping"
         ]
     },
     {
@@ -208,5 +101,113 @@
             "measurements"
         ],
         "abandoned": "php-units-of-measure/php-units-of-measure"
+    },
+    {
+        "name": "easypost/easypost-php",
+        "version": "3.4.0",
+        "version_normalized": "3.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/EasyPost/easypost-php.git",
+            "reference": "d3f5915497493e07bc9c46fdede3202d7222864f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/EasyPost/easypost-php/zipball/d3f5915497493e07bc9c46fdede3202d7222864f",
+            "reference": "d3f5915497493e07bc9c46fdede3202d7222864f",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2017-10-30T21:41:18+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "EasyPost": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sawyer Bateman"
+            }
+        ],
+        "description": "EasyPost Shipping API Client Library for PHP",
+        "homepage": "https://github.com/EasyPost/easypost-php",
+        "keywords": [
+            "api",
+            "easypost",
+            "shipping"
+        ]
+    },
+    {
+        "name": "dvdoug/boxpacker",
+        "version": "1.6.3",
+        "version_normalized": "1.6.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dvdoug/BoxPacker.git",
+            "reference": "cc1b7627c5cdca02f6e60ad451368e23b36116ae"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dvdoug/BoxPacker/zipball/cc1b7627c5cdca02f6e60ad451368e23b36116ae",
+            "reference": "cc1b7627c5cdca02f6e60ad451368e23b36116ae",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "psr/log": "^1.0"
+        },
+        "require-dev": {
+            "behat/behat": "^3.4",
+            "leanphp/behat-code-coverage": "^3.0",
+            "monolog/monolog": "^1.0",
+            "phpunit/phpunit": "^4.8.35||^5.0||^6.0"
+        },
+        "time": "2018-01-01T19:23:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "DVDoug\\BoxPacker\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Doug Wright",
+                "role": "Developer"
+            }
+        ],
+        "description": "An implementation of the 3D (actually 4D) bin packing/knapsack problem (aka creating parcels by putting items into boxes)",
+        "homepage": "http://boxpacker.io/",
+        "keywords": [
+            "bin packing",
+            "binpacking",
+            "box",
+            "boxes",
+            "boxpacking",
+            "container",
+            "knapsack",
+            "packaging",
+            "packing",
+            "parcel",
+            "parcelpacking",
+            "shipping"
+        ]
     }
 ]
